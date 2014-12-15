@@ -1,44 +1,54 @@
 /**
-* User.js
-*
-* @description :: TODO: You might write a short summary of how this model works and what it represents here.
-* @docs        :: http://sailsjs.org/#!documentation/models
-*/
+ * User.js
+ *
+ * @description :: TODO: You might write a short summary of how this model works and what it represents here.
+ * @docs        :: http://sailsjs.org/#!documentation/models
+ */
 
 module.exports = {
-  schema:true,
+  schema: true,
   attributes: {
-    name:{
-      type:'string',
-      required:true
+    id: {
+      type: 'integer',
+      primaryKey: true,
+      SERIAL: true,
+      autoIncrement:true
     },
-    title:{
-      type:'string',
-      required:true
+    name: {
+      type: 'string',
+      required: true
     },
-    username:{
-      type:'string',
-      required:true
+    title: {
+      type: 'string',
+      required: true
     },
-    email:{
-      type:'string',
-      email:true,
-      required:true,
-      unique:true
+    username: {
+      type: 'string',
+      required: true
     },
-    password:{
-      type:'string'
+    email: {
+      type: 'string',
+      email: true,
+      required: true,
+      unique: true
+    },
+    password: {
+      type: 'string',
+      required: true
     },
     hobby: {
-      type:"string"
+      type: "string",
+      required: false
     },
     skills: {
-      type:"string"
+      type: "string",
+      required: false
     },
-    about:{
-      type:"string"
+    about: {
+      type: "string",
+      required: false
     },
-    toJSON:function() {
+    toJSON: function () {
       var obj = this.toObject();
       delete obj.password;
       //delete obj.password_confirmation;

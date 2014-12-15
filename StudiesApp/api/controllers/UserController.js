@@ -13,7 +13,9 @@ module.exports = {
     res.view();
   },
   create: function (req, res, next) {
-    User.create(req.params.all(), function userCreated(err, user) {
+    var params = req.params.all();
+    if(params.id) delete params.id;
+    User.create(params, function userCreated(err, user) {
       if (err) {
         console.log("UserController.create", err);
         req.session.flash = {err: err};
