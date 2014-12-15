@@ -29,6 +29,15 @@ module.exports = {
     password:{
       type:'string'
     },
+    hobby: {
+      type:"string"
+    },
+    skills: {
+      type:"string"
+    },
+    about:{
+      type:"string"
+    },
     toJSON:function() {
       var obj = this.toObject();
       delete obj.password;
