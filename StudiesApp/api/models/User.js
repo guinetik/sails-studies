@@ -36,6 +36,10 @@ module.exports = {
       type:"boolean",
       defaultsTo:false
     },
+    online:{
+      type:"boolean",
+      defaultsTo:false
+    },
     password: {
       type: 'string',
       required: true

@@ -25,7 +25,11 @@ module.exports = {
       req.session.authenticated = true;
       req.session.User = user;
       //
-      res.redirect("user/show/" + user.id);
+      user.online = true;
+      user.save(function(err, user) {
+        if(err) return next(err);
+        res.redirect("user/show/" + user.id);
+      });
     });
   },
   me:function(req,res,next) {
@@ -77,5 +81,12 @@ module.exports = {
       });
       res.redirect("/user");
     })
+  },
+  subscribe:function(req,res, next) {
+    User.find(function foundUsers(err, users) {
+      if(err) return next(err);
+      User.subscribe(req.socket);
+      User.subscribe(req.socket, users);
+    });
   }
 };
