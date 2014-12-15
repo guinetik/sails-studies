@@ -66,6 +66,7 @@ module.exports = {
     if (userId) {
       User.update(userId, {online: false}, function (err) {
         if (err) return next(err);
+        User.publishUpdate(userId, {loggedIn: false, id: userId});
         req.session.destroy();
         res.redirect("/session/new");
       });

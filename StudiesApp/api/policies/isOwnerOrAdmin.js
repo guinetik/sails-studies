@@ -7,7 +7,6 @@
  *
  */
 module.exports = function(req, res, next) {
-  console.log(req.session.User.id, req.param("id"));
   var sessionUserMatchesId = req.session.User.id === parseInt(req.param("id"));
   var isAdmin = req.session.User.admin;
   console.log(sessionUserMatchesId, isAdmin);

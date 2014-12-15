@@ -34,6 +34,7 @@ module.exports.policies = {
     "edit": ["isOwnerOrAdmin","flash"],
     "show":"sessionAuth",
     "me":"sessionAuth",
+    "subscribe":"flash",
     "*" : "isOwnerOrAdmin"
   }
 
