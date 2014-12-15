@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12">
-      <form role="form" action="/user/create" method="post">
+      <form id="form-signin" role="form" action="/user/create" method="post">
         <input type="hidden" name="_csrf" value="<%= _csrf %>"/>
         <h2>Please Sign Up
           <small>It's free and always will be.</small>
@@ -29,6 +29,8 @@
             </div>
           </div>
         </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-6">
         <div class="form-group">
           <input type="text"
                  name="username"
@@ -37,6 +39,8 @@
                  placeholder="Screen Name"
                  tabindex="3">
         </div>
+            </div>
+          <div class="col-xs-12 col-sm-6 col-md-6">
         <div class="form-group">
           <input type="email"
                  name="email"
@@ -45,6 +49,8 @@
                  placeholder="Email Address"
                  tabindex="4">
         </div>
+            </div>
+          </div>
         <div class="row">
           <div class="col-xs-12 col-sm-6 col-md-6">
             <div class="form-group">
