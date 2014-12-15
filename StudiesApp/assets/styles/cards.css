@@ -98,6 +98,9 @@
   background-color: rgb(215, 215, 215);
   border-radius: 40px;
 }
+.info-card-detail p {
+  color: #28415b;
+}
 
 a.social-icon {
   text-decoration: none !important;

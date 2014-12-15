@@ -45,13 +45,4 @@ module.exports.routes = {
   * for configuration options and examples.                                  *
   *                                                                          *
   ***************************************************************************/
-  ,
-  '/login': {
-    view: 'static/login'
-  }
-  ,
-  '/register': {
-    view: 'static/signup'
-  }
-
 };
