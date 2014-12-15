@@ -25,37 +25,52 @@
           + Import stylesheets from other directories
           + Use a different or additional preprocessor, like SASS, SCSS or Stylus
   --><!--STYLES-->
-<link rel="stylesheet" href="/styles/bootstrap.min.css">
+<link rel="stylesheet" href="/styles/bootstrap-theme.min.css">
 <link rel="stylesheet" href="/styles/cards.css">
+<link rel="stylesheet" href="/styles/glyphicons.css">
 <link rel="stylesheet" href="/styles/importer.css">
 <link rel="stylesheet" href="/styles/profile.css">
 <!--STYLES END-->
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
+        rel="stylesheet">
 </head>
 <body>
 <div class="navbar navbar-inverse navbar-static-top padding">
-    <a href="/"
-       class="navbar-brand">Studies App</a>
-    <button class="navbar-toggle"
-            data-toggle="collapse"
-            data-target=".navHeaderCollapse"></button>
-    <div class="collapse navbar-collapse navHeaderCollapse">
-      <ul class="nav navbar-nav navbar-right">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="/user/login">Log in</a></li>
-        <li><a href="/user/new">Sign up</a></li>
-        <li><a href="/user">User List</a></li>
-        <!--<li class="dropdown">
-          <a href="/login"
-             class="dropdown-toggle"
-             data-toggle="dropdown">Register</a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Twitter</a></li>
-            <li><a href="#">Facebook</a></li>
-            <li><a href="#">Google+</a></li>
-            <li><a href="#">Instagram</a></li>
-          </ul>
-        </li>-->
-      </ul>
+  <a href="/"
+     class="navbar-brand">Studies App</a>
+  <button class="navbar-toggle"
+          data-toggle="collapse"
+          data-target=".navHeaderCollapse"></button>
+  <div class="collapse navbar-collapse navHeaderCollapse">
+    <ul class="nav navbar-nav navbar-left">
+      <li class="active"><a href="#">Home</a></li>
+      <!--RESTRICTED ACCESS STUFF-->
+      <% if(session.authenticated){ %>
+      <li><a href="/user/me">My Profile</a></li>
+      <%}%>
+      <% if(session.authenticated && session.User.admin){ %>
+      <li><a href="/user">User Administration</a></li>
+      <%}%>
+      <!--END RESTRICTED ACCESS STUFF--><!--<li class="dropdown">
+        <a href="/login"
+           class="dropdown-toggle"
+           data-toggle="dropdown">Register</a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Twitter</a></li>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">Google+</a></li>
+          <li><a href="#">Instagram</a></li>
+        </ul>
+      </li>-->
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <% if(!session.authenticated){ %>
+      <li><a href="/session/new">Log in</a></li>
+      <li><a href="/user/new">Sign up</a></li>
+      <% } else { %>
+      <li><a href="/session/destroy">Sign out</a></li>
+      <% } %>
+    </ul>
   </div>
 </div>
 <div class="container">
@@ -64,7 +79,7 @@
 <div class="navbar navbar-default navbar-fixed-bottom">
   <div class="container">
     <p class="navbar-text pull-left">© 2014 <a href="http://github.com/guinetik"
-                                                                      target="_blank">guinetik</a>
+                                               target="_blank">guinetik</a>
     </p>
     <a href="http://youtu.be/zJahlKPCL9g"
        class="navbar-btn btn-danger btn pull-right"> <span class="glyphicon glyphicon-star"></span>  Subscribe on
@@ -119,7 +134,6 @@
 <script src="/js/dependencies/bootstrap.min.js"></script>
 <script src="/js/dependencies/jquery.validate.min.js"></script>
 <script src="/js/main.js"></script>
-<script src="/js/signup.js"></script>
 <!--SCRIPTS END-->
 </body>
 </html>

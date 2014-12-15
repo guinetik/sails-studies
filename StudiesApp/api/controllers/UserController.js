@@ -14,15 +14,22 @@ module.exports = {
   },
   create: function (req, res, next) {
     var params = req.params.all();
-    if(params.id) delete params.id;
+    delete params.id;
     User.create(params, function userCreated(err, user) {
       if (err) {
         console.log("UserController.create", err);
         req.session.flash = {err: err};
         return res.redirect("user/new");
       }
+      //
+      req.session.authenticated = true;
+      req.session.User = user;
+      //
       res.redirect("user/show/" + user.id);
     });
+  },
+  me:function(req,res,next) {
+    res.view("user/show", {user:req.session.User});
   },
   show: function (req, res, next) {
     User.findOne(req.param("id"), function foundUser(err, user) {
@@ -34,9 +41,13 @@ module.exports = {
     });
   },
   index: function (req, res, next) {
+    var paging = false;
     User.find(function foundUsers(err, users) {
       if (err) return next(err);
-      res.view({users: users});
+      res.view({
+        users: users,
+        paging:paging
+      });
     });
   },
   edit: function (req, res, next) {

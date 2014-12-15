@@ -6,47 +6,54 @@
         <table id="mytable"
                class="table table-bordred table-striped">
           <thead>
-          <th><input type="checkbox"
-                     id="checkall"/></th>
+          <th>Admin</th>
           <th>id</th>
           <th>Name</th>
           <th>Username</th>
           <th>Title</th>
           <th>Email</th>
-          <th>Show</th>
-          <th>Edit</th>
-          <th>Delete</th>
           </thead>
           <tbody>
 
           <% _.each(users, function(user) { %>
           <tr>
-            <td><input type="checkbox"
-                       class="checkthis"/></td>
+            <td>
+              <% if(user.admin) { %>
+              <button class="btn btn-default btn-xs">
+                <i class="fa fa-check warning"></i>
+              </button>
+              <%} else {%>
+              <button class="btn btn-warning btn-xs">
+                <i class="fa fa-ban"></i>
+              </button>
+              <%}%>
+            </td>
             <td><%= user.id %></td>
             <td><%= user.name %></td>
             <td><%= user.username %></td>
             <td><%= user.title %></td>
             <td><%= user.email %></td>
-            <td><p><a href="/user/show/<%= user.id %>"
-                      class="btn btn-success btn-xs"
-                      data-title="Show"><span class="glyphicon glyphicon-pencil"></span></a></p></td>
-            <td><p><a href="/user/edit/<%= user.id %>"
-                      class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span></a></p></td>
             <td>
-              <p>
+                <a href="/user/show/<%= user.id %>"
+                   class="btn btn-success btn-xs"
+                   data-title="Show"><span class="glyphicon glyphicon-user"></span></a>
+            </td>
+            <td>
+              <a href="/user/edit/<%= user.id %>"
+                      class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span></a></td>
+            <td>
                 <button class="btn btn-danger btn-xs"
                         data-whatever="<%= user.id %>"
                         data-title="Delete"
                         data-toggle="modal"
                         data-target="#deleteModal"><span class="glyphicon glyphicon-trash"></span></button>
-              </p>
             </td>
           </tr>
           <% }) %>
           </tbody>
         </table>
         <div class="clearfix"></div>
+        <%if(paging) {%>
         <ul class="pagination pull-right">
           <li class="disabled"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
           <li class="active"><a href="#">1</a></li>
@@ -56,6 +63,7 @@
           <li><a href="#">5</a></li>
           <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
         </ul>
+        <%}%>
       </div>
     </div>
   </div>
