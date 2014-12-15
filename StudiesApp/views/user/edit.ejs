@@ -1,0 +1,113 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <form id="form-signin" role="form" action="/user/update/<%= user.id %>" method="post">
+        <input type="hidden" name="_csrf" value="<%= _csrf %>"/>
+        <h2>Edit your stuff
+        </h2>
+        <hr class="colorgraph">
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+              <input type="text"
+                     name="name"
+                     value="<%= user.name %>"
+                     id="name"
+                     class="form-control input-lg"
+                     placeholder="Name"
+                     tabindex="1">
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+              <input type="text"
+                     name="title"
+                     id="title"
+                     value="<%= user.title %>"
+                     class="form-control input-lg"
+                     placeholder="Title"
+                     tabindex="2">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-6">
+        <div class="form-group">
+          <input type="text"
+                 name="username"
+                 id="username"
+                 value="<%= user.username %>"
+                 class="form-control input-lg"
+                 placeholder="Screen Name"
+                 tabindex="3">
+        </div>
+            </div>
+          <div class="col-xs-12 col-sm-6 col-md-6">
+        <div class="form-group">
+          <input type="email"
+                 value="<%= user.email %>"
+                 name="email"
+                 id="email"
+                 class="form-control input-lg"
+                 placeholder="Email Address"
+                 tabindex="4">
+        </div>
+            </div>
+          </div>
+        <hr class="colorgraph">
+        <h4>Profile</h4>
+        <div class="row" style="padding: 12px">
+          <div class="form-group">
+            <textarea type="text"
+                      name="about"
+                      id="about"
+                      class="form-control input-lg"
+                      placeholder="Tell us about yourself"
+                      tabindex="7"><%= user.about %></textarea>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+              <input type="text"
+                     name="skills"
+                     value="<%= user.skills %>"
+                     id="skills"
+                     class="form-control input-lg"
+                     placeholder="What are your skills? (comma separated)"
+                     tabindex="7">
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-6">
+          <div class="form-group">
+            <input type="text"
+                   name="hobby"
+                   id="hobby"
+                   value="<%= user.hobby %>"
+                   class="form-control input-lg"
+                   placeholder="What are your hobbies?"
+                   tabindex="7">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4 col-sm-3 col-md-3">
+            <button type="submit"
+                    class="btn btn-primary"
+                    data-color="info"
+                    tabindex="7">Edit
+            </button>
+          </div>
+        </div>
+        <hr class="colorgraph">
+        <%if(flash && flash.err) {%>
+        <ul class="padding alert alert-dismissable alert-danger">
+          <% Object.keys(flash.err).forEach(function(error) { %>
+          <li><%- JSON.stringify(flash.err[error]) %></li>
+          <%})%>
+        </ul>
+        <%}%>
+      </form>
+    </div>
+  </div>
+  </div>

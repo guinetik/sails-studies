@@ -6,15 +6,12 @@
  */
 
 module.exports = {
-
-  'new': function (req, res) {
+  new: function (req, res) {
     res.view();
   },
-
-  'login': function (req, res) {
+  login: function (req, res) {
     res.view();
   },
-
   create: function (req, res, next) {
     User.create(req.params.all(), function userCreated(err, user) {
       if (err) {
@@ -54,7 +51,18 @@ module.exports = {
       if (err) {
         return res.redirect('user/edit/' + req.param("id"));
       }
-      res.redirect("/user/show" + req.param("id"));
+      res.redirect("/user/show/" + req.param("id"));
     });
+  },
+  destroy: function (req, res, next) {
+    User.findOne(req.param("id"), function foundUser(err, user) {
+      if (err) return next(err);
+      if (!user) return next("User doesnt exist");
+
+      User.destroy(req.param("id"), function userDestroyed(err){
+        if(err) return next(err);
+      });
+      res.redirect("/user");
+    })
   }
 };
