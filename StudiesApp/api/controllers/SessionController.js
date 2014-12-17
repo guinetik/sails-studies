@@ -7,7 +7,7 @@
 
 var bcrypt = require("bcrypt");
 module.exports = {
-    new: function (req, res) {
+    "new": function (req, res) {
         res.view("session/new");
     },
     create: function (req, res, next) {
@@ -56,7 +56,7 @@ module.exports = {
                 user.online = true;
                 user.save(function (err, user) {
                     if (err) return next(err);
-                    User.publishUpdate(user.id, {loggedIn: true, id: user.id});
+                    User.publishUpdate(user.id, {loggedIn: true, id: user.id}, req.socket);
                     if (req.session.User.admin) {
                         // if the user is an admin, redirect to the user admin page
                         res.redirect("/user");
@@ -72,7 +72,7 @@ module.exports = {
         if (userId) {
             User.update(userId, {online: false}, function (err) {
                 if (err) return next(err);
-                User.publishUpdate(userId, {loggedIn: false, id: userId});
+                User.publishUpdate(userId, {loggedIn: false, id: userId}, req.socket);
                 req.session.destroy();
                 res.redirect("/session/new");
             });

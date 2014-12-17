@@ -20,6 +20,7 @@ module.exports = {
                 req.session.flash = {err: err};
                 return res.redirect("user/new");
             }
+            User.publishCreate(user, req.socket);
             //
             req.session.authenticated = true;
             req.session.User = user;
@@ -27,7 +28,7 @@ module.exports = {
             user.online = true;
             user.save(function (err, user) {
                 if (err) return next(err);
-                User.publishCreate(user);
+
                 res.redirect("user/show/" + user.id);
             });
         });
@@ -58,7 +59,7 @@ module.exports = {
         User.findOne(req.param("id"), function foundUser(err, user) {
             if (err) return next(err);
             if (!user) return next();
-            User.publishUpdate(user.id, {updated: true, user:user});
+            User.publishUpdate(user.id, {updated: true, user: user}, req.socket);
             res.view({
                 user: user
             });
@@ -75,21 +76,19 @@ module.exports = {
     destroy: function (req, res, next) {
         User.findOne(req.param("id"), function foundUser(err, user) {
             if (err) return next(err);
-            if (!user) return next("User doesnt exist");
+            if (!user) return next("User doesn't exist");
 
             User.destroy(req.param("id"), function userDestroyed(err) {
                 if (err) return next(err);
-                User.publishDestroy(user.id);
+                User.publishDestroy(user.id, req.socket);
             });
             res.redirect("/user");
         });
     },
     subscribe: function (req, res, next) {
-        User.watch(req.socket);
         User.find(function foundUsers(err, users) {
             if (err) return next(err);
             User.subscribe(req.socket, users, ["create", "update", "destroy"]);
-            User.watch(req.socket);
             res.send(200);
         });
     }

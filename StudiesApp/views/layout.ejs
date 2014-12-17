@@ -47,6 +47,7 @@
       <!--RESTRICTED ACCESS STUFF-->
       <% if(session.authenticated){ %>
       <li><a href="/user/me">My Profile</a></li>
+      <li><a href="/rooms/join">Join Room</a></li>
       <%}%>
       <% if(session.authenticated && session.User.admin){ %>
       <li><a href="/user">User Administration</a></li>

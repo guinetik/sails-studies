@@ -44,6 +44,11 @@ module.exports = {
       type: 'string',
       required: true
     },
+    coins: {
+      type:"integer",
+      required:false,
+      defaultsTo:100
+    },
     hobby: {
       type: "string",
       required: false
