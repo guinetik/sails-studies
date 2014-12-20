@@ -19,43 +19,49 @@
 
 module.exports.policies = {
 
-  /***************************************************************************
-  *                                                                          *
-  * Default policy for all controllers and actions (`true` allows public     *
-  * access)                                                                  *
-  *                                                                          *
-  ***************************************************************************/
+    /***************************************************************************
+     *                                                                          *
+     * Default policy for all controllers and actions (`true` allows public     *
+     * access)                                                                  *
+     *                                                                          *
+     ***************************************************************************/
 
-   '*': 'flash',
+    '*': 'flash',
 
-  user:{
-    "new" : "flash",
-    "create":"flash",
-    "edit": ["isOwnerOrAdmin","flash"],
-    "show":"sessionAuth",
-    "me":"sessionAuth",
-    "subscribe":"flash",
-    "*" : "isOwnerOrAdmin"
-  }
+    user: {
+        "new": "flash",
+        "create": "flash",
+        "edit": ["isOwnerOrAdmin", "flash"],
+        "show": ["flash","sessionAuth"],
+        "me": ["flash","sessionAuth"],
+        "subscribe": "flash",
+        "add_coin": ["sessionAuth","flash"]
+    },
+    coins: {
+        "*":["flash", "sessionAuth"]
+    },
+    shop: {
+        "*":["flash", "sessionAuth"]
+    }
 
-  /***************************************************************************
-  *                                                                          *
-  * Here's an example of mapping some policies to run before a controller    *
-  * and its actions                                                          *
-  *                                                                          *
-  ***************************************************************************/
-	// RabbitController: {
+    /***************************************************************************
+     *                                                                          *
+     * Here's an example of mapping some policies to run before a controller    *
+     * and its actions                                                          *
+     *                                                                          *
+     ***************************************************************************/
+    // RabbitController: {
 
-		// Apply the `false` policy as the default for all of RabbitController's actions
-		// (`false` prevents all access, which ensures that nothing bad happens to our rabbits)
-		// '*': false,
+    // Apply the `false` policy as the default for all of RabbitController's actions
+    // (`false` prevents all access, which ensures that nothing bad happens to our rabbits)
+    // '*': false,
 
-		// For the action `nurture`, apply the 'isRabbitMother' policy
-		// (this overrides `false` above)
-		// nurture	: 'isRabbitMother',
+    // For the action `nurture`, apply the 'isRabbitMother' policy
+    // (this overrides `false` above)
+    // nurture	: 'isRabbitMother',
 
-		// Apply the `isNiceToAnimals` AND `hasRabbitFood` policies
-		// before letting any users feed our rabbits
-		// feed : ['isNiceToAnimals', 'hasRabbitFood']
-	// }
+    // Apply the `isNiceToAnimals` AND `hasRabbitFood` policies
+    // before letting any users feed our rabbits
+    // feed : ['isNiceToAnimals', 'hasRabbitFood']
+    // }
 };

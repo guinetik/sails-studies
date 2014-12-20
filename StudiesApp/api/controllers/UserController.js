@@ -6,8 +6,50 @@
  */
 
 module.exports = {
-    new: function (req, res) {
+    'new': function (req, res) {
         res.view();
+    },
+    "add_coin": function (req, res) {
+        User.query("BEGIN", function (error, result) {
+            var userid = req.session.User.id;
+            console.log("BEGIN ERROR", error);
+            console.log("BEGIN RESULT", result);
+            console.log("userid", userid);
+            User.findOne(req.session.User.id, function foundUser(err, user) {
+                if (err || !user) {
+                    rollback();
+                }
+                var numCoins = parseInt(req.body.coins);
+                var totalCoins = user.coins + numCoins;
+                console.log("current coins", user.coins);
+                console.log("coins to purchase", numCoins);
+                console.log("total coins", totalCoins);
+                User.update(userid, {coins: totalCoins}, function userUpdated(err) {
+                    if(!err) {
+                        req.session.User.coins = totalCoins;
+                        commit();
+                    } else {
+                        rollback();
+                    }
+                });
+            });
+        });
+        function rollback() {
+            User.query("ROLLBACK", function(error, result){
+                console.log("ROLLBACK ERROR", error);
+                console.log("ROLLBACK RESULT", result);
+                req.session.flash = {"err": ["There was an error processing the purchase", error], kind: "danger"};
+                return res.redirect("coin/add/");
+            });
+        }
+        function commit() {
+            User.query("COMMIT", function(error, result){
+                console.log("COMMIT ERROR", error);
+                console.log("COMMIT RESULT", result);
+                req.session.flash = {"err": ["Purchase Succesful!"], kind: "success"};
+                return res.redirect("user/show/" + req.session.User.id);
+            });
+        }
     },
     login: function (req, res) {
         res.view();
@@ -17,7 +59,7 @@ module.exports = {
         delete params.id;
         User.create(params, function userCreated(err, user) {
             if (err) {
-                req.session.flash = {err: err};
+                req.session.flash = {err: err, kind: "danger" };
                 return res.redirect("user/new");
             }
             User.publishCreate(user, req.socket);
@@ -86,6 +128,7 @@ module.exports = {
         });
     },
     subscribe: function (req, res, next) {
+//        console.log("User.subscribe");
         User.find(function foundUsers(err, users) {
             if (err) return next(err);
             User.subscribe(req.socket, users, ["create", "update", "destroy"]);

@@ -142,7 +142,7 @@
         <% if(flash && flash.err) { %>
         <ul class="padding alert alert-dismissable alert-danger">
           <% Object.keys(flash.err).forEach(function(error) { %>
-          <li><%- JSON.stringify(flash.err[error]) %></li>
+          <li><%- flash.err[error] %></li>
           <% }) %>
         </ul>
         <% } %>

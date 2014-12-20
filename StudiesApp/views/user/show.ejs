@@ -1,164 +1,214 @@
-
-<div class="panel" style="margin-bottom: 100px">
-  <div class="row">
+<div class="padding">
+    <% if(flash && flash.err) { %>
+    <ul class="padding alert alert-dismissable alert-<%= flash.kind %>">
+        <% Object.keys(flash.err).forEach(function(error) { %>
+        <li><%- flash.err[error] %></li>
+        <% }) %>
+    </ul>
+    <% } %>
+</div>
+<div class="panel"
+     style="margin-bottom: 100px">
+    <div class="row">
         <div class="col-sm-12">
-          <figure style="float: right;margin: 10px">
-            <center><img src="http://www.localcrimenews.com/wp-content/uploads/2013/07/default-user-icon-profile.png" alt="" class="img-circle img-responsive"></center>
-            <figcaption class="ratings">
-              <p><br/>
-                Ratings
-                <a href="#">
-                  <span class="fa fa-star"></span>
-                </a>
-                <a href="#">
-                  <span class="fa fa-star"></span>
-                </a>
-                <a href="#">
-                  <span class="fa fa-star"></span>
-                </a>
-                <a href="#">
-                  <span class="fa fa-star"></span>
-                </a>
-                <a href="#">
-                  <span class="fa fa-star-o"></span>
-                </a>
-              </p>
-            </figcaption>
-          </figure>
-          <div class="col-xs-12 col-sm-8">
-            <h2><%- user.name%></h2>
-            <h4><%- user.title %></h4>
-            <p><strong>About: </strong> <%- user.about %> </p>
-            <p><strong>Hobbies: </strong> <%- user.hobby %> </p>
-            <p><strong>Skills: </strong>
-              <% _.each(user.skills.split(','), function(skill){%>
-              <span class="tags"><%=skill%></span>
-            <%})%>
-            </p>
-              <%if(user.id == session.User.id) {%>
-              <div class="btn-group dropup btn-block">
-                  <button type="button" class="btn btn-primary"><span class="fa fa-gear"></span> Options </button>
-                  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                      <span class="caret"></span>
-                      <span class="sr-only">Toggle Dropdown</span>
-                  </button>
-                  <ul class="dropdown-menu text-left" role="menu">
-                      <li><a href="/session/destroy"><span class="glyphicon glyphicon-log-out pull-right"></span>Log out</a></li>
-                      <li class="divider"></li>
-                      <li><a href="/user/edit/<%=user.id%>"><span class="fa fa-edit pull-right"></span>Edit Profile</a></li>
-                  </ul>
-              </div>
-              <%}%>
-          </div>
-        </div>
-  </div>
+            <figure style="float: right;margin: 10px">
+                <center>
+                    <img src="http://www.localcrimenews.com/wp-content/uploads/2013/07/default-user-icon-profile.png"
+                         alt=""
+                         class="img-circle img-responsive"></center>
+                <figcaption class="ratings">
+                    <p><br/>
+                        Ratings
+                        <a href="#">
+                            <span class="fa fa-star"></span>
+                        </a>
+                        <a href="#">
+                            <span class="fa fa-star"></span>
+                        </a>
+                        <a href="#">
+                            <span class="fa fa-star"></span>
+                        </a>
+                        <a href="#">
+                            <span class="fa fa-star"></span>
+                        </a>
+                        <a href="#">
+                            <span class="fa fa-star-o"></span>
+                        </a>
+                    </p>
+                </figcaption>
+            </figure>
+            <div class="col-xs-12 col-sm-8">
+                <h2><%- user.name %></h2>
+                <h4><%- user.title %></h4>
 
-  <div class="row">
-    <div class="col-xs-12 divider text-center">
-      <div class="col-xs-12 col-sm-4 emphasis">
-        <h2><strong> 20,7K </strong></h2>
-        <p><small>Followers</small></p>
-        <button class="btn btn-success btn-block"><span class="fa fa-plus-circle"></span> Follow </button>
-      </div>
-      <div class="col-xs-12 col-sm-4 emphasis">
-        <h2><strong>245</strong></h2>
-        <p><small>Following</small></p>
-        <button class="btn btn-success btn-block"><span class="fa fa-envelope"></span> Send a message </button>
-      </div>
-      <div class="col-xs-12 col-sm-4 emphasis">
-        <h2><strong>43</strong></h2>
-        <p><small>Posts</small></p>
-        <button class="btn btn-info btn-block"><span class="fa fa-user"></span> View all posts </button>
-      </div>
-    </div>
-  </div>
-  <h2 class="padding">Recent Posts</h2>
-  <div class="row padding">
-    <div class="[ col-sm-6 col-md-4 ]">
-      <div class="[ info-card ]">
-        <img style="width: 100%" src="http://api.randomuser.me/portraits/women/45.jpg" />
-        <div class="[ info-card-details ] animate">
-          <div class="[ info-card-header ]">
-            <h1> User Name </h1>
-            <h3> User Title </h3>
-          </div>
-          <div class="[ info-card-detail ]">
-            <p>People often say that beauty is in the eye of the beholder</p>
-          </div>
+                <p><strong>About: </strong> <%- user.about %> </p>
+
+                <p><strong>Hobbies: </strong> <%- user.hobby %> </p>
+
+                <p><strong>Skills: </strong>
+                    <% _.each(user.skills.split(','), function(skill){ %>
+                    <span class="tags"><%= skill %></span>
+                    <% }) %>
+                </p>
+                <% if(user.id == session.User.id) { %>
+                <div class="btn-group dropup btn-block">
+                    <button type="button"
+                            class="btn btn-primary"><span class="fa fa-gear"></span> Options
+                    </button>
+                    <button type="button"
+                            class="btn btn-primary dropdown-toggle"
+                            data-toggle="dropdown">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu text-left"
+                        role="menu">
+                        <li><a href="/session/destroy"><span class="glyphicon glyphicon-log-out pull-right"></span>Log
+                                out</a></li>
+                        <li class="divider"></li>
+                        <li><a href="/user/edit/<%= user.id %>"><span class="fa fa-edit pull-right"></span>Edit Profile</a>
+                        </li>
+                    </ul>
+                </div>
+                <% } %>
+            </div>
         </div>
-      </div>
     </div>
-    <div class="[ col-sm-6 col-md-4 ]">
-      <div class="[ info-card ]">
-        <img style="width: 100%" src="http://api.randomuser.me/portraits/women/45.jpg" />
-        <div class="[ info-card-details ] animate">
-          <div class="[ info-card-header ]">
-            <h1> User Name </h1>
-            <h3> User Title </h3>
-          </div>
-          <div class="[ info-card-detail ]">
-            <p>People often say that beauty is in the eye of the beholder</p>
-          </div>
+
+    <div class="row">
+        <div class="col-xs-12 divider text-center">
+            <div class="col-xs-12 col-sm-4 emphasis">
+                <h2><strong> 20,7K </strong></h2>
+
+                <p>
+                    <small>Followers</small>
+                </p>
+                <button class="btn btn-success btn-block"><span class="fa fa-plus-circle"></span> Follow</button>
+            </div>
+            <div class="col-xs-12 col-sm-4 emphasis">
+                <h2><strong>245</strong></h2>
+
+                <p>
+                    <small>Following</small>
+                </p>
+                <button class="btn btn-success btn-block"><span class="fa fa-envelope"></span> Send a message</button>
+            </div>
+            <div class="col-xs-12 col-sm-4 emphasis">
+                <h2><strong>43</strong></h2>
+
+                <p>
+                    <small>Posts</small>
+                </p>
+                <button class="btn btn-info btn-block"><span class="fa fa-user"></span> View all posts</button>
+            </div>
         </div>
-      </div>
     </div>
-    <div class="[ col-sm-6 col-md-4 ]">
-      <div class="[ info-card ]">
-        <img style="width: 100%" src="http://api.randomuser.me/portraits/women/45.jpg" />
-        <div class="[ info-card-details ] animate">
-          <div class="[ info-card-header ]">
-            <h1> User Name </h1>
-            <h3> User Title </h3>
-          </div>
-          <div class="[ info-card-detail ]">
-            <p>People often say that beauty is in the eye of the beholder</p>
-          </div>
+    <h2 class="padding">Recent Posts</h2>
+
+    <div class="row padding">
+        <div class="[ col-sm-6 col-md-4 ]">
+            <div class="[ info-card ]">
+                <img style="width: 100%"
+                     src="http://api.randomuser.me/portraits/women/45.jpg"/>
+
+                <div class="[ info-card-details ] animate">
+                    <div class="[ info-card-header ]">
+                        <h1> User Name </h1>
+
+                        <h3> User Title </h3>
+                    </div>
+                    <div class="[ info-card-detail ]">
+                        <p>People often say that beauty is in the eye of the beholder</p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-  <div class="row padding">
-    <div class="[ col-sm-6 col-md-4 ]">
-      <div class="[ info-card ]">
-        <img style="width: 100%" src="http://api.randomuser.me/portraits/women/45.jpg" />
-        <div class="[ info-card-details ] animate">
-          <div class="[ info-card-header ]">
-            <h1> User Name </h1>
-            <h3> User Title </h3>
-          </div>
-          <div class="[ info-card-detail ]">
-            <p>People often say that beauty is in the eye of the beholder</p>
-          </div>
+        <div class="[ col-sm-6 col-md-4 ]">
+            <div class="[ info-card ]">
+                <img style="width: 100%"
+                     src="http://api.randomuser.me/portraits/women/45.jpg"/>
+
+                <div class="[ info-card-details ] animate">
+                    <div class="[ info-card-header ]">
+                        <h1> User Name </h1>
+
+                        <h3> User Title </h3>
+                    </div>
+                    <div class="[ info-card-detail ]">
+                        <p>People often say that beauty is in the eye of the beholder</p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <div class="[ col-sm-6 col-md-4 ]">
-      <div class="[ info-card ]">
-        <img style="width: 100%" src="http://api.randomuser.me/portraits/women/45.jpg" />
-        <div class="[ info-card-details ] animate">
-          <div class="[ info-card-header ]">
-            <h1> User Name </h1>
-            <h3> User Title </h3>
-          </div>
-          <div class="[ info-card-detail ]">
-            <p>People often say that beauty is in the eye of the beholder</p>
-          </div>
+        <div class="[ col-sm-6 col-md-4 ]">
+            <div class="[ info-card ]">
+                <img style="width: 100%"
+                     src="http://api.randomuser.me/portraits/women/45.jpg"/>
+
+                <div class="[ info-card-details ] animate">
+                    <div class="[ info-card-header ]">
+                        <h1> User Name </h1>
+
+                        <h3> User Title </h3>
+                    </div>
+                    <div class="[ info-card-detail ]">
+                        <p>People often say that beauty is in the eye of the beholder</p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-    <div class="[ col-sm-6 col-md-4 ]">
-      <div class="[ info-card ]">
-        <img style="width: 100%" src="http://api.randomuser.me/portraits/women/45.jpg" />
-        <div class="[ info-card-details ] animate">
-          <div class="[ info-card-header ]">
-            <h1> User Name </h1>
-            <h3> User Title </h3>
-          </div>
-          <div class="[ info-card-detail ]">
-            <p>People often say that beauty is in the eye of the beholder</p>
-          </div>
+    <div class="row padding">
+        <div class="[ col-sm-6 col-md-4 ]">
+            <div class="[ info-card ]">
+                <img style="width: 100%"
+                     src="http://api.randomuser.me/portraits/women/45.jpg"/>
+
+                <div class="[ info-card-details ] animate">
+                    <div class="[ info-card-header ]">
+                        <h1> User Name </h1>
+
+                        <h3> User Title </h3>
+                    </div>
+                    <div class="[ info-card-detail ]">
+                        <p>People often say that beauty is in the eye of the beholder</p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+        <div class="[ col-sm-6 col-md-4 ]">
+            <div class="[ info-card ]">
+                <img style="width: 100%"
+                     src="http://api.randomuser.me/portraits/women/45.jpg"/>
+
+                <div class="[ info-card-details ] animate">
+                    <div class="[ info-card-header ]">
+                        <h1> User Name </h1>
+
+                        <h3> User Title </h3>
+                    </div>
+                    <div class="[ info-card-detail ]">
+                        <p>People often say that beauty is in the eye of the beholder</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="[ col-sm-6 col-md-4 ]">
+            <div class="[ info-card ]">
+                <img style="width: 100%"
+                     src="http://api.randomuser.me/portraits/women/45.jpg"/>
+
+                <div class="[ info-card-details ] animate">
+                    <div class="[ info-card-header ]">
+                        <h1> User Name </h1>
+
+                        <h3> User Title </h3>
+                    </div>
+                    <div class="[ info-card-detail ]">
+                        <p>People often say that beauty is in the eye of the beholder</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>

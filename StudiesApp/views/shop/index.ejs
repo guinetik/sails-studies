@@ -1,0 +1,100 @@
+<div class="container"
+     style="margin-bottom: 100px">
+    <% if(flash && flash.err) { %>
+    <ul class="padding alert alert-dismissable alert-<%= flash.kind %>">
+        <% Object.keys(flash.err).forEach(function(error) { %>
+        <li><%- flash.err[error] %></li>
+        <% }) %>
+    </ul>
+    <% } %>
+    <h1>Spend your Coins on these useless plans</h1>
+    <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3"
+             id="plan-0">
+            <div class="panel price panel-red">
+                <div class="panel-heading  text-center">
+                    <h3>PRO PLAN</h3>
+                </div>
+                <div class="panel-body text-center">
+                    <p class="lead"
+                       style="font-size:40px"><strong>5 coins</strong></p>
+                </div>
+                <ul class="list-group list-group-flush text-center">
+                    <li class="list-group-item"><i class="icon-ok text-danger"></i> Personal use</li>
+                    <li class="list-group-item"><i class="icon-ok text-danger"></i> Unlimited projects</li>
+                    <li class="list-group-item"><i class="icon-ok text-danger"></i> 27/7 support</li>
+                </ul>
+                <div class="panel-footer">
+                    <a class="btn btn-lg btn-block btn-danger"
+                       href="shop/purchase?plan=1">BUY NOW!</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3"
+             id="plan-1">
+            <div class="panel price panel-blue">
+                <div class="panel-heading arrow_box text-center">
+                    <h3>DEV PLAN</h3>
+                </div>
+                <div class="panel-body text-center">
+                    <p class="lead"
+                       style="font-size:40px"><strong>10 coins</strong></p>
+                </div>
+                <ul class="list-group list-group-flush text-center">
+                    <li class="list-group-item"><i class="icon-ok text-danger"></i> Personal use</li>
+                    <li class="list-group-item"><i class="icon-ok text-danger"></i> Unlimited projects</li>
+                    <li class="list-group-item"><i class="icon-ok text-danger"></i> 27/7 support</li>
+                </ul>
+                <div class="panel-footer">
+                    <a class="btn btn-lg btn-block btn-info btn-coins"
+                       href="shop/purchase?plan=2">BUY NOW!
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3"
+             id="plan-2">
+            <div class="panel price panel-green">
+                <div class="panel-heading arrow_box text-center">
+                    <h3>FREE PLAN</h3>
+                </div>
+                <div class="panel-body text-center">
+                    <p class="lead"
+                       style="font-size:40px"><strong>50 coins</strong></p>
+                </div>
+                <ul class="list-group list-group-flush text-center">
+                    <li class="list-group-item"><i class="icon-ok text-danger"></i> Personal use</li>
+                    <li class="list-group-item"><i class="icon-ok text-danger"></i> Unlimited projects</li>
+                    <li class="list-group-item"><i class="icon-ok text-danger"></i> 27/7 support</li>
+                </ul>
+                <div class="panel-footer">
+                    <a class="btn btn-lg btn-block btn-success"
+                            href="shop/purchase?plan=3">BUY NOW!
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3"
+             id="plan-3">
+            <div class="panel price panel-grey">
+                <div class="panel-heading arrow_box text-center">
+                    <h3>FREE PLAN</h3>
+                </div>
+                <div class="panel-body text-center">
+                    <p class="lead"
+                       style="font-size:40px"><strong>100 coins</strong></p>
+                </div>
+                <ul class="list-group list-group-flush text-center">
+                    <li class="list-group-item"><i class="icon-ok text-danger"></i> Personal use</li>
+                    <li class="list-group-item"><i class="icon-ok text-danger"></i> Unlimited projects</li>
+                    <li class="list-group-item"><i class="icon-ok text-danger"></i> 27/7 support</li>
+                </ul>
+                <div class="panel-footer">
+                    <a class="btn btn-lg btn-block btn-primary"
+                       href="shop/purchase?plan=4">BUY NOW!
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -16,6 +16,7 @@ module.exports = {
                 {name: "usernamePasswordRequired", message: "You must enter an email and a password"}
             ];
             req.session.flash = {
+                kind:"danger",
                 err: error
             };
             res.redirect("/session/new");
@@ -31,6 +32,7 @@ module.exports = {
                     }
                 ];
                 req.session.flash = {
+                    kind:"danger",
                     err: noAccountError
                 };
                 res.redirect("/session/new");
@@ -46,6 +48,7 @@ module.exports = {
                         }
                     ];
                     req.session.flash = {
+                        kind:"danger",
                         err: passwordMismatchError
                     };
                     res.redirect("/session/new");

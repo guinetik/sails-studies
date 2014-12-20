@@ -1,58 +1,70 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Study App</title>
-  <!-- Viewport mobile tag for sensible mobile support -->
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1, maximum-scale=1">
-  <!--
-      Stylesheets and Preprocessors
-      ==============================
+    <title>Study App</title>
+    <!-- Viewport mobile tag for sensible mobile support -->
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!--
+        Stylesheets and Preprocessors
+        ==============================
 
-      You can always bring in CSS files manually with `<link>` tags, or asynchronously
-      using a solution like AMD (RequireJS).  Or, if you like, you can take advantage
-      of Sails' conventional asset pipeline (boilerplate Gruntfile).
+        You can always bring in CSS files manually with `<link>` tags, or asynchronously
+        using a solution like AMD (RequireJS).  Or, if you like, you can take advantage
+        of Sails' conventional asset pipeline (boilerplate Gruntfile).
 
-      By default, stylesheets from your `assets/styles` folder are included
-      here automatically (between STYLES and STYLES END). Both CSS (.css) and LESS (.less)
-      are supported. In production, your styles will be minified and concatenated into
-      a single file.
+        By default, stylesheets from your `assets/styles` folder are included
+        here automatically (between STYLES and STYLES END). Both CSS (.css) and LESS (.less)
+        are supported. In production, your styles will be minified and concatenated into
+        a single file.
 
-      To customize any part of the built-in behavior, just edit `tasks/pipeline.js`.
-      For example, here are a few things you could do:
+        To customize any part of the built-in behavior, just edit `tasks/pipeline.js`.
+        For example, here are a few things you could do:
 
-          + Change the order of your CSS files
-          + Import stylesheets from other directories
-          + Use a different or additional preprocessor, like SASS, SCSS or Stylus
-  --><!--STYLES-->
+            + Change the order of your CSS files
+            + Import stylesheets from other directories
+            + Use a different or additional preprocessor, like SASS, SCSS or Stylus
+    --><!--STYLES-->
 <link rel="stylesheet" href="/styles/bootstrap-theme.min.css">
 <link rel="stylesheet" href="/styles/cards.css">
 <link rel="stylesheet" href="/styles/glyphicons.css">
 <link rel="stylesheet" href="/styles/importer.css">
 <link rel="stylesheet" href="/styles/profile.css">
 <!--STYLES END-->
-  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
-        rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
+          rel="stylesheet">
 </head>
 <body>
-<div class="navbar navbar-inverse navbar-static-top padding">
-  <a href="/"
-     class="navbar-brand">Studies App</a>
-  <button class="navbar-toggle"
-          data-toggle="collapse"
-          data-target=".navHeaderCollapse"></button>
-  <div class="collapse navbar-collapse navHeaderCollapse">
-    <ul class="nav navbar-nav navbar-left">
-      <li class="active"><a href="#">Home</a></li>
-      <!--RESTRICTED ACCESS STUFF-->
-      <% if(session.authenticated){ %>
-      <li><a href="/user/me">My Profile</a></li>
-      <li><a href="/rooms/join">Join Room</a></li>
-      <%}%>
-      <% if(session.authenticated && session.User.admin){ %>
-      <li><a href="/user">User Administration</a></li>
-      <%}%>
-      <!--END RESTRICTED ACCESS STUFF--><!--<li class="dropdown">
+<div class="navbar navbar-default navbar-static-top padding">
+    <a href="/"
+       class="navbar-brand">Studies App</a>
+    <button class="navbar-toggle"
+            data-toggle="collapse"
+            data-target=".navHeaderCollapse"></button>
+    <div class="collapse navbar-collapse navHeaderCollapse">
+        <ul class="nav navbar-nav navbar-left">
+            <li class="<%= Helper.isCurrentPage(req,undefined, undefined) ? 'active' : '' %>">
+                <a href="/">Home</a>
+            </li>
+            <!--RESTRICTED ACCESS STUFF-->
+            <% if(session.authenticated){ %>
+            <li class="<%= Helper.isCurrentPage(req, 'user', 'me') ? 'active' : '' %>">
+                <a href="/user/me">My Profile</a>
+            </li>
+            <li class="<%= Helper.isCurrentPage(req, 'coins', 'add') ? 'active' : '' %>">
+                <a href="/coins/add">Add Coins</a>
+            </li>
+            <li class="<%= Helper.isCurrentPage(req, 'shop', 'index') ? 'active' : '' %>">
+                <a href="/shop">Shop</a>
+            </li>
+            <% } %>
+            <% if(session.authenticated && session.User.admin){ %>
+            <li class="<%= Helper.isCurrentPage(req, 'user', 'index') ? 'active' : '' %>">
+                <a href="/user">User
+                    Administration</a>
+            </li>
+            <% } %>
+            <!--END RESTRICTED ACCESS STUFF--><!--<li class="dropdown">
         <a href="/login"
            class="dropdown-toggle"
            data-toggle="dropdown">Register</a>
@@ -63,28 +75,29 @@
           <li><a href="#">Instagram</a></li>
         </ul>
       </li>-->
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <% if(!session.authenticated){ %>
-      <li><a href="/session/new">Log in</a></li>
-      <li><a href="/user/new">Sign up</a></li>
-      <% } else { %>
-      <li><a href="/session/destroy">Sign out</a></li>
-      <% } %>
-    </ul>
-  </div>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <% if(!session.authenticated){ %>
+            <li><a href="/session/new">Log in</a></li>
+            <li><a href="/user/new">Sign up</a></li>
+            <% } else { %>
+            <li><a>Coins: <%= session.User.coins %></a></li>
+            <li><a href="/session/destroy">Sign out</a></li>
+            <% } %>
+        </ul>
+    </div>
 </div>
 <div class="container">
-  <%- body %>
+    <%- body %>
 </div>
 <div class="navbar navbar-default navbar-fixed-bottom">
-  <div class="container">
-    <p class="navbar-text pull-left">© 2014 <a href="http://github.com/guinetik"
-                                               target="_blank">guinetik</a>
-    </p>
-    <a href="http://github.com/guinetik"
-       class="navbar-btn btn-default btn pull-right"> <span class="fa fa-github-alt"></span>Hit me up on Github</a>
-  </div>
+    <div class="container">
+        <p class="navbar-text pull-left">© 2014 <a href="http://github.com/guinetik"
+                                                   target="_blank">guinetik</a>
+        </p>
+        <a href="http://github.com/guinetik"
+           class="navbar-btn btn-default btn pull-right"> <span class="fa fa-github-alt"></span>Hit me up on Github</a>
+    </div>
 </div>
 <!--
     Client-side Templates

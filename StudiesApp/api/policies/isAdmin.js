@@ -14,7 +14,7 @@ module.exports = function(req, res, next) {
     return next();
   } else {
     var error = [{name:"requireAdminError", message:"You must have admin privilleges to see this stuff."}]
-    req.session.flash = {err:error};
+    req.session.flash = {err:error, "class":"danger"};
     res.redirect("/session/new");
     return;
   }

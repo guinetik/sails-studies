@@ -9,10 +9,10 @@
 module.exports = function(req, res, next) {
   var sessionUserMatchesId = req.session.User.id === parseInt(req.param("id"));
   var isAdmin = req.session.User.admin;
-  console.log(sessionUserMatchesId, isAdmin);
+//  console.log(sessionUserMatchesId, isAdmin);
   if (!(sessionUserMatchesId || isAdmin)) {
     var error = [{name:"issuficientRightsError", message:"You don't have enough privileges to see this stuff."}]
-    req.session.flash = {err:error};
+    req.session.flash = {err:error, "class":"danger"};
     res.redirect("/session/new");
     return;
   }
